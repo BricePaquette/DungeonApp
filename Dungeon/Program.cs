@@ -1,12 +1,18 @@
-﻿namespace Dungeon
+﻿using DungeonLibrary;
+
+namespace Dungeon
 {
     internal class Program
     {
         static void Main(string[] args)
         {
 
-            Console.WriteLine("\n\tYou wake on an anchored ship you hear voices, but before you act you start to remember who you are...");
+            Console.WriteLine("\n\tYou wake on an anchored ship you hear voices, but before you act you start to remember who you are...\n\tPress any key to continue");
+            Console.ReadKey();
+            Console.Clear();
+            
             bool exit = false;
+            
             #region GamePlay Loop
             do
             {
@@ -30,12 +36,15 @@
                         break;
                     case ConsoleKey.P:
                         break;
-                    case ConsoleKey.E:
+                    case ConsoleKey.E:      
                         break;
                     case ConsoleKey.X:
+                        Console.WriteLine("Yeah id quit too");
+                        exit = true;
                         break;
                     default:
                         Console.WriteLine("Learn to read... Press A) C) R) P) E) or X)");
+                        
                         break;
                 }
             } while (!exit);
