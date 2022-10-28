@@ -60,7 +60,7 @@ namespace DungeonLibrary
             _minDamage = minDamage;
             Name = name;
             BonusHitChance = bonusHitChance;
-            type = Type;
+            Type = type;
             Description = description;
         }
 
