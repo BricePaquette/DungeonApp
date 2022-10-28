@@ -7,6 +7,22 @@ namespace Dungeon
     {
         static void Main(string[] args)
         {
+            #region Boats
+            List<string> boatDescriptions = new List<string>()
+            {
+                "You walk out onto the deck of the ship... Your surrounded by a fleet of what seems to be pirate ships and you hear men shouting about an intruder then",
+                "The pirates’ ship is well-stocked with provisions. The ship's banner features a bloody dagger. The ship's mascot is a macaque",
+                "The pirates’ ship is in need of repair. The ship's banner features an octopus. The ship's mascot is a budgie",
+                "The pirates’ ship is “on loan” to some other pirates. The ship's banner features a sea turtle. The ship's mascot is a conure",
+                "The pirates’ ship is barely staying afloat. The ship's banner features a bloody dagger",
+                "The pirates’ ship is barely staying afloat. The ship's banner features a swordfish.",
+                "This pirates ship looks as though it used to be a navy vessel, make sure youre in good shape to fight",
+                "ship 6",
+                "ship 7",
+                "ship 8",
+                
+            };
+            #endregion
 
             #region Weapons
             Weapon cutlass = new Weapon(10, 15, "Black Beards Cutlass", 30, WeaponType.Cutlass, "The legendary pirate Black Beard personal cutlass");
@@ -44,10 +60,11 @@ namespace Dungeon
             bool isPlayerSureWeapons = false;
             bool exit = false;
             Player player = new Player(40, username, 40, 40, MoralityType.Neutral, cutlass, 30);
+            int loopCount = 0;
             while (!isPlayerSureMorals)
             {
 
-                int loopCount = 0;
+                
                 loopCount++;
                 Console.WriteLine(loopCount);
                 if (loopCount == 1)
@@ -189,7 +206,7 @@ namespace Dungeon
                             $"{player}\n" +
                             $"Press any key to continue...");
                         Console.ReadKey();
-                        isPlayerSureMorals = true;
+                        isPlayerSureWeapons = true;
                         Console.Clear();
                         break;
                     case ConsoleKey.N:
@@ -200,6 +217,7 @@ namespace Dungeon
                         exit = true;
                         isPlayerSureMorals = true;
                         isPlayerSureWeapons = true;
+                        loopCount = 0;
                         break;
                     default:
                         Console.WriteLine("You should probably quit man this is a text game and you obvously cant read");
@@ -212,15 +230,76 @@ namespace Dungeon
             #endregion
 
             #region Enemy Creation
+            Captain luffy = new Captain(100, 100, "Monkey D' Luffy", 50, 30, 25 , 10, "A what looks like a kid but fights like a man", Captain.DrunkGenerator());
+            Pirate crew0 = new Pirate(15, 15, "God Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
+            Pirate crew1 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
+            Pirate crew2 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
+            Pirate crew3 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
+            Pirate crew4 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
+            Pirate crew5 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
+            Pirate crew6 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
 
+            List<Pirate> strawHats = new List<Pirate>()
+            {
+                crew0,
+                crew1,
+                crew2,
+                crew3,
+                crew4,
+                crew5,
+                crew6,
+                luffy
+            };
             #endregion
 
-
+            loopCount = 0;
 
             #region GamePlay Loop
             while (!exit)
             {
 
+                
+                int score = 0;
+                if (loopCount == 0)
+                {
+                    Console.WriteLine($"{boatDescriptions[0]}\n {strawHats[0].Description} jumps down and stands in your way his name is {strawHats[0].Name}\nWhat will you do...");
+                    
+                }
+                if (loopCount == 1)
+                {
+                    Console.WriteLine($"{boatDescriptions[1]}\n {strawHats[1].Description} stands in your way is name is {strawHats[1].Name}\nWhat will you do...");
+
+                }
+                if (loopCount == 2)
+                {
+                    Console.WriteLine($"{boatDescriptions[2]}\n {strawHats[2].Description} stands in your way is name is {strawHats[2].Name}\nWhat will you do...");
+
+                }
+                if (loopCount == 3)
+                {
+                    Console.WriteLine($"{boatDescriptions[3]}\n {strawHats[3].Description} stands in your way is name is {strawHats[3].Name}\nWhat will you do...");
+
+                }
+                if (loopCount == 4)
+                {
+                    Console.WriteLine($"{boatDescriptions[4]}\n {strawHats[4].Description} stands in your way is name is {strawHats[4].Name}\nWhat will you do...");
+
+                }
+                if (loopCount == 5)
+                {
+                    Console.WriteLine($"{boatDescriptions[5]}\n {strawHats[5].Description} stands in your way is name is {strawHats[5].Name}\nWhat will you do...");
+
+                }
+                if (loopCount == 6)
+                {
+                    Console.WriteLine($"{boatDescriptions[6]}\n {strawHats[6].Description} stands in your way is name is {strawHats[6].Name}\nWhat will you do...");
+
+                }
+                if (loopCount == 7)
+                {
+                    Console.WriteLine($"{boatDescriptions[7]}\n {strawHats[7].Description} stands in your way is name is {strawHats[7].Name}\nWhat will you do...");
+
+                }
 
                 Console.Write("\nPlease choose an action:\n" +
                     "A) Attack\n" +
@@ -251,6 +330,7 @@ namespace Dungeon
                         
                         break;
                 }
+                loopCount++;
             } 
             #endregion
         }

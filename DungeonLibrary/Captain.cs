@@ -19,17 +19,17 @@ namespace DungeonLibrary
             }
         }
 
-        public bool DrunkGenerator()
+        public static bool DrunkGenerator()
         {
             Random random = new Random();
             int drunkTell = random.Next(1, 2);
             if (drunkTell == 2)
             {
-                return Drunk = true;
+               return true;
             }
             else
             {
-                return Drunk = false;
+                return false;
             }
 
         }
