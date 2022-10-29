@@ -1,5 +1,6 @@
 ﻿using DungeonLibrary;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Dungeon
 {
@@ -7,22 +8,6 @@ namespace Dungeon
     {
         static void Main(string[] args)
         {
-            #region Boats
-            List<string> boatDescriptions = new List<string>()
-            {
-                "You walk out onto the deck of the ship... Your surrounded by a fleet of what seems to be pirate ships and you hear men shouting about an intruder then",
-                "The pirates’ ship is well-stocked with provisions. The ship's banner features a bloody dagger. The ship's mascot is a macaque",
-                "The pirates’ ship is in need of repair. The ship's banner features an octopus. The ship's mascot is a budgie",
-                "The pirates’ ship is “on loan” to some other pirates. The ship's banner features a sea turtle. The ship's mascot is a conure",
-                "The pirates’ ship is barely staying afloat. The ship's banner features a bloody dagger",
-                "The pirates’ ship is barely staying afloat. The ship's banner features a swordfish.",
-                "This pirates ship looks as though it used to be a navy vessel, make sure youre in good shape to fight",
-                "ship 6",
-                "ship 7",
-                "ship 8",
-                
-            };
-            #endregion
 
             #region Weapons
             Weapon cutlass = new Weapon(10, 15, "Black Beards Cutlass", 30, WeaponType.Cutlass, "The legendary pirate Black Beard personal cutlass");
@@ -66,7 +51,6 @@ namespace Dungeon
 
                 
                 loopCount++;
-                Console.WriteLine(loopCount);
                 if (loopCount == 1)
                 {
                     Console.WriteLine($"Okay Mr. {username} how are your morals");
@@ -90,60 +74,91 @@ namespace Dungeon
                     string display = m.ToString().Replace('_', ' ');
                     Console.WriteLine($"{(int)m + 1}) {display}");
                 }
-                int moral = int.Parse(Console.ReadLine()) - 1;
-                MoralityType userMoral = (MoralityType)moral;
 
-
-                switch (userMoral)
+                MoralityType userMoral = MoralityType.Neutral;
+                try
                 {
-                    case MoralityType.Lawful_Good:
-                        Console.WriteLine("Overall boost to max hp and charm chance");
-                        player.Morality = MoralityType.Lawful_Good;
-                        break;
-                    case MoralityType.Lawful_Neutral:
-                        Console.WriteLine("Overall boost to max hp and block");
-                        player.Morality = MoralityType.Lawful_Neutral;
-                        break;
-                    case MoralityType.Lawful_Evil:
-                        Console.WriteLine("Overall boost to max hp and hit chance");
-                        player.Morality = MoralityType.Lawful_Evil;
-                        break;
-                    case MoralityType.Chaotic_Good:
-                        Console.WriteLine("Overall boost to damage and charm chance");
-                        player.Morality = MoralityType.Chaotic_Good;
-                        break;
-                    case MoralityType.Chaotic_Neutral:
-                        Console.WriteLine("Overall boost to damage and block");
-                        player.Morality = MoralityType.Chaotic_Neutral;
-                        break;
-                    case MoralityType.Chaotic_Evil:
-                        Console.WriteLine("Overall boost to damage and hit chance");
-                        player.Morality = MoralityType.Chaotic_Evil;
-                        break;
-                    case MoralityType.Neutral:
-                        break;
-                    default:
-                        Console.WriteLine("I didn't know stupid was an option");
-                        break;
+                    int moral = int.Parse(Console.ReadLine()) - 1;
+                    userMoral = (MoralityType)moral;
                 }
-                
-                Console.WriteLine("Are you sure?\n" +
+                catch (Exception e)
+                {
+
+                    Console.WriteLine("You're now neutral b-word");
+
+                }
+                bool moralityCheck = false;
+                while (!moralityCheck)
+                {
+
+
+                    
+
+                        switch (userMoral)
+                        {
+                            case MoralityType.Lawful_Good:
+                                Console.WriteLine("Overall boost to max hp and charm chance");
+                                player.Morality = MoralityType.Lawful_Good;
+                                moralityCheck = true;
+
+                                break;
+                            case MoralityType.Lawful_Neutral:
+                                Console.WriteLine("Overall boost to max hp and block");
+                                player.Morality = MoralityType.Lawful_Neutral;
+                                moralityCheck = true;
+
+                                break;
+                            case MoralityType.Lawful_Evil:
+                                Console.WriteLine("Overall boost to max hp and hit chance");
+                                player.Morality = MoralityType.Lawful_Evil;
+                                moralityCheck = true;
+
+                                break;
+                            case MoralityType.Chaotic_Good:
+                                Console.WriteLine("Overall boost to damage and charm chance");
+                                player.Morality = MoralityType.Chaotic_Good;
+                                moralityCheck = true;
+
+                                break;
+                            case MoralityType.Chaotic_Neutral:
+                                Console.WriteLine("Overall boost to damage and block");
+                                player.Morality = MoralityType.Chaotic_Neutral;
+                                moralityCheck = true;
+
+                                break;
+                            case MoralityType.Chaotic_Evil:
+                                Console.WriteLine("Overall boost to damage and hit chance");
+                                player.Morality = MoralityType.Chaotic_Evil;
+                                moralityCheck = true;
+
+                                break;
+                            case MoralityType.Neutral:
+                                moralityCheck = true;
+                                break;
+                            
+                            
+                        }
+                    
+                    
+                }
+                Console.WriteLine($"Are you sure you're a {player.Morality.ToString().Replace('_', ' ').ToLower()} individual\n" +
                     "Y) Yes\n" +
                     "N) No\n" +
-                    "E) Exit\n");
-                ConsoleKey playerMoralityConfirmation = Console.ReadKey(true).Key;
+                    "X) Exit\n");
+                string playerMoralityConfirmation = Console.ReadLine().ToLower();
+                
                 switch (playerMoralityConfirmation)
                 {
-                    case ConsoleKey.Y:
+                    case "y":
                         Console.WriteLine("Ahh now that you've said it it makes sense\nPress any key to continue...");
                         Console.ReadKey();
                         isPlayerSureMorals = true;
                         Console.Clear();
                         break;
-                    case ConsoleKey.N:
+                    case "n":
                         Console.Clear();
                         break;
-                    case ConsoleKey.E:
+                    case "e":
                         Console.WriteLine("Makes sense later man");
                         exit = true;
                         isPlayerSureMorals = true;
@@ -163,30 +178,31 @@ namespace Dungeon
                     $"P) {pike.Name}\n" +
                     $"S) {shield.Name}\n" +
                     $"E) Exit");
-                ConsoleKey userWeapon = Console.ReadKey(true).Key;
+                string userWeapon = Console.ReadLine().ToLower();
+                Console.Clear();
                 switch (userWeapon)
                 {
-                    case ConsoleKey.C:
+                    case "c":
                         player.EquipedWeapon = cutlass;
                         Console.WriteLine(cutlass);
                         break;
-                    case ConsoleKey.B:
+                    case "b":
                         player.EquipedWeapon = blunderbuss;
                         Console.WriteLine(blunderbuss);
                         break;
-                    case ConsoleKey.H:
+                    case "h":
                         player.EquipedWeapon = hook;
                         Console.WriteLine(hook);
                         break;
-                    case ConsoleKey.P:
+                    case "p":
                         player.EquipedWeapon = pike;
                         Console.WriteLine(pike);
                         break;
-                    case ConsoleKey.S:
+                    case "s":
                         player.EquipedWeapon = shield;
                         Console.WriteLine(shield);
                         break;
-                    case ConsoleKey.E:
+                    case "e":
                         isPlayerSureWeapons = true;
                         exit = true;
                         break;                        
@@ -198,10 +214,10 @@ namespace Dungeon
                                    "Y) Yes\n" +
                                    "N) No\n" +
                                    "E) Exit\n");
-                ConsoleKey playerWeaponConfirmation = Console.ReadKey(true).Key;
+                string playerWeaponConfirmation = Console.ReadLine().ToLower();
                 switch (playerWeaponConfirmation)
                 {
-                    case ConsoleKey.Y:
+                    case "y":
                         Console.WriteLine($"Alright You're set to go good luck but before you go here are your stats\n" +
                             $"{player}\n" +
                             $"Press any key to continue...");
@@ -209,10 +225,10 @@ namespace Dungeon
                         isPlayerSureWeapons = true;
                         Console.Clear();
                         break;
-                    case ConsoleKey.N:
+                    case "n":
                         Console.Clear();
                         break;
-                    case ConsoleKey.E:
+                    case "e":
                         Console.WriteLine("Makes sense later man");
                         exit = true;
                         isPlayerSureMorals = true;
@@ -230,29 +246,44 @@ namespace Dungeon
             #endregion
 
             #region Enemy Creation
-            Captain luffy = new Captain(100, 100, "Monkey D' Luffy", 50, 30, 25 , 10, "A what looks like a kid but fights like a man", Captain.DrunkGenerator());
-            Pirate crew0 = new Pirate(15, 15, "God Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
-            Pirate crew1 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
-            Pirate crew2 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
-            Pirate crew3 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
-            Pirate crew4 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
-            Pirate crew5 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
-            Pirate crew6 = new Pirate(15, 15, "Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
+            Captain luffy = new Captain(50, 50, "Monkey D' Luffy", 50, 30, 25 , 10, "A what looks like a kid but fights like a man", Captain.DrunkGenerator());
+            Pirate godUsopp = new Pirate(15, 15, "God Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
+            Pirate nami = new Pirate(20, 20, "Nami", 40, 30, 14, 6, "A redhead that carries a metalic blue pipe");
+            Pirate chopper = new Pirate(38, 38, "Chopper", 45, 45, 15, 7, "A reindeer? Or a human? It's unknown");
+            Pirate franky = new Pirate(40, 40, "Franky", 45, 60, 14, 9, "A really american cyborg standing like 8 foot tall and wearing a speedo");
+            Pirate brook = new Pirate(35, 35, "Brook", 30, 30, 12, 10, "Singning and dancing with a cane sword this skeliton is");
+            Captain zoro = new Captain(45, 45, "Zoro", 50, 50, 19, 9, "Mr. Cool he holds 3 swords and has green hair", Captain.DrunkGenerator());
+            Pirate sanji = new Pirate(40, 40, "Sanji", 40, 40, 15, 9, "Blond swooshy hair, curled eyebrows, and a cigarette");
 
             List<Pirate> strawHats = new List<Pirate>()
             {
-                crew0,
-                crew1,
-                crew2,
-                crew3,
-                crew4,
-                crew5,
-                crew6,
+                godUsopp,
+                chopper,
+                nami,
+                franky,
+                brook,
+                sanji,
+                zoro,
                 luffy
             };
             #endregion
-
             loopCount = 0;
+
+            #region Boats
+            List<string> boatRoomDescriptions = new List<string>()
+            {
+                "You look around and see a bunch of makeshift weapons... There is a man in the room\nWhat will you do...",
+                $"After defeating the last pirate you run into the next room and you see a bunch of medical supplies and {strawHats[loopCount].Description}...\nWhat will you do?",
+                $"You run into the next room which seems to be housing a bunch of maps and charts you see {strawHats[loopCount].Description}...\nWhat will you do?",
+                $"This part of the ship seems to be a workshop of sorts you see a {strawHats[loopCount].Description} is sitting in a chair...\nWhat will you do?",
+                $"This room seems to be a library where you see {strawHats[loopCount].Description}...\nWhat will you do?",
+                $"Through the door you finally see light... You stumble out and {strawHats[loopCount].Description} stands in your way...\nWhat will you do?",
+                $"The ship is bigger than you thought {strawHats[loopCount].Description} stands in your way...\nWhat will you do?",
+                $"You reach the end of the ship without a raft in sight {strawHats[loopCount].Description} stands in your way...\nWhat will you do?",
+                
+                
+            };
+            #endregion
 
             #region GamePlay Loop
             while (!exit)
@@ -262,45 +293,48 @@ namespace Dungeon
                 int score = 0;
                 if (loopCount == 0)
                 {
-                    Console.WriteLine($"{boatDescriptions[0]}\n {strawHats[0].Description} jumps down and stands in your way his name is {strawHats[0].Name}\nWhat will you do...");
+                    Console.WriteLine($"{boatRoomDescriptions[0]}");
                     
                 }
                 if (loopCount == 1)
                 {
-                    Console.WriteLine($"{boatDescriptions[1]}\n {strawHats[1].Description} stands in your way is name is {strawHats[1].Name}\nWhat will you do...");
+                    Console.WriteLine($"{boatRoomDescriptions[1]}\n {strawHats[1].Description} stands in your way is name is {strawHats[1].Name}\nWhat will you do...");
 
                 }
                 if (loopCount == 2)
                 {
-                    Console.WriteLine($"{boatDescriptions[2]}\n {strawHats[2].Description} stands in your way is name is {strawHats[2].Name}\nWhat will you do...");
+                    Console.WriteLine($"{boatRoomDescriptions[2]}\n {strawHats[2].Description} stands in your way is name is {strawHats[2].Name}\nWhat will you do...");
 
                 }
                 if (loopCount == 3)
                 {
-                    Console.WriteLine($"{boatDescriptions[3]}\n {strawHats[3].Description} stands in your way is name is {strawHats[3].Name}\nWhat will you do...");
+                    Console.WriteLine($"{boatRoomDescriptions[3]}\n {strawHats[3].Description} stands in your way is name is {strawHats[3].Name}\nWhat will you do...");
 
                 }
                 if (loopCount == 4)
                 {
-                    Console.WriteLine($"{boatDescriptions[4]}\n {strawHats[4].Description} stands in your way is name is {strawHats[4].Name}\nWhat will you do...");
+                    Console.WriteLine($"{boatRoomDescriptions[4]}\n {strawHats[4].Description} stands in your way is name is {strawHats[4].Name}\nWhat will you do...");
 
                 }
                 if (loopCount == 5)
                 {
-                    Console.WriteLine($"{boatDescriptions[5]}\n {strawHats[5].Description} stands in your way is name is {strawHats[5].Name}\nWhat will you do...");
+                    Console.WriteLine($"{boatRoomDescriptions[5]}\n {strawHats[5].Description} stands in your way is name is {strawHats[5].Name}\nWhat will you do...");
 
                 }
                 if (loopCount == 6)
                 {
-                    Console.WriteLine($"{boatDescriptions[6]}\n {strawHats[6].Description} stands in your way is name is {strawHats[6].Name}\nWhat will you do...");
+                    Console.WriteLine($"{boatRoomDescriptions[6]}\n {strawHats[6].Description} stands in your way is name is {strawHats[6].Name}\nWhat will you do...");
 
                 }
                 if (loopCount == 7)
                 {
-                    Console.WriteLine($"{boatDescriptions[7]}\n {strawHats[7].Description} stands in your way is name is {strawHats[7].Name}\nWhat will you do...");
+                    Console.WriteLine($"{boatRoomDescriptions[7]}\n {strawHats[7].Description} stands in your way is name is {strawHats[7].Name}\nWhat will you do...");
 
                 }
-
+                    bool reload = false;
+                do
+                {
+                
                 Console.Write("\nPlease choose an action:\n" +
                     "A) Attack\n" +
                     "C) Charm\n" +
@@ -309,28 +343,159 @@ namespace Dungeon
                     "E) Enemy Information\n" +
                     "X) Exit\n");
                 ConsoleKey userChoice = Console.ReadKey(true).Key;//Capture the pressed key, hide the key from the console, and execute immediatly
+                Console.Clear();
                 switch (userChoice)
                 {
                     case ConsoleKey.A:
+                        //Combat
+                        
+                        
+                        Combat.DoBattle(player, strawHats[loopCount]);
+                        if (strawHats[loopCount].Life <= 0)
+                        {
+                            //Use greent to idicate winning
+                            Console.ForegroundColor = ConsoleColor.Green;
+                                //update score
+                                score += 7;
+                                //output the result
+                                Console.WriteLine($"\nYou Kocked out {strawHats[loopCount].Name} and gained 7 points you now have {score} points");
+                            //Reset the color back to normal
+                            Console.ResetColor();
+                            
+                            
+                                bool isShopClosed = false;
+                                while (!isShopClosed) 
+                                {
+                                    if (score >= 1)
+                                    {
+                                        if (loopCount == 0)
+                                        {
+                                            Console.WriteLine("Welcome to the shop after defeating enemies you can purchase upgrades here or refil health\n");
+                                        }
+                                        Console.WriteLine($"_-_-_- Shop -_-_-_\t\tCurrent Score: {score}\n{player}\n" +
+                                            "1) 1 Point Block + 2\n" +
+                                            "2) 2 Points Max Health + 3\n" +
+                                            "4) 4 Points to refil Health\n" +
+                                            "5) 5 Points Min & Max Damage + 1\n" +
+                                            "X) Exit");
+                                        string userSpend = Console.ReadLine().ToLower();
+                                        Console.Clear();
+                                        switch (userSpend)
+                                        {
+                                            case "1":
+                                            case "one":
+                                                Console.WriteLine("Good Choice Block + 2 has been added");
+                                                score -= 1;
+                                                player.Block += 2;
+                                                break;
+                                            case "2":
+                                            case "two":
+                                                Console.WriteLine("Smart 3 Health Points has Been added to your max health");
+                                                score -= 2;
+                                                player.MaxLife += 3;
+                                                break;
+                                            case "4":
+                                            case "four":
+                                                Console.WriteLine("Playing it safe I see...");
+                                                score -= 4;
+                                                player.Life = player.MaxLife;
+                                                break;
+                                            case "5":
+                                            case "five":
+                                                Console.WriteLine("Watch out big spender over here damage range increased by 1");
+                                                score -= 5;
+                                                player.EquipedWeapon.MinDamge += 1;
+                                                player.EquipedWeapon.MaxDamge += 1;
+                                                break;
+                                            case "x":
+                                                Console.WriteLine("See you next time!");
+                                                isShopClosed = true;
+                                                break;
+                                            default:
+                                                Console.WriteLine("I'm not upset just disapointed");
+                                                break;
+                                        } 
+                                    }
+                                    else
+                                    {
+                                        score = 0;
+                                        Console.WriteLine($"_-_-_- Shop -_-_-_\t\tCurrent Score: {score}\n{player}\n" +
+                                             "X) Exit");
+                                        string userSpend = Console.ReadLine().ToLower();
+                                        Console.Clear();
+                                        switch (userSpend)
+                                        {
+                                           
+                                            case "x":
+                                                Console.WriteLine("See you next time!");
+                                                isShopClosed = true;
+                                                break;
+                                            default:
+                                                Console.WriteLine("I'm not upset just disapointed");
+                                                break;
+                                        }
+                                    }
+                                }
+                                //update loop count
+                            loopCount++;
+
+                                
+
+                            //leave inner loop
+                            reload = true;
+                        }
+                        
+
                         break;
                     case ConsoleKey.C:
-                        break;
+                            //if player.CharmChance is closer to the number generated charm worked
+
+                            Random rand = new Random();
+                            
+                            int monsterTolerance = rand.Next(0, 101);
+                            int playerCharm = rand.Next(player.CharmChance, 101);
+                            int compare = rand.Next(0, 101);
+                            if (monsterTolerance -100 > playerCharm -100)
+                            {
+                                Console.WriteLine($"{strawHats[loopCount].Name} is not impressed");
+                            }else if (monsterTolerance -100 < playerCharm - 100)
+                            {
+                                Console.WriteLine($"{strawHats[loopCount].Name} will let you pass for now");
+                                loopCount++;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{strawHats[loopCount]} played you and took his shot when your guard was down...\nYou died better luck next time");
+                                exit = true;
+                            }
+                            break;
                     case ConsoleKey.R:
-                        break;
+                            //Run Away - Attack of opportunity
+                            Console.WriteLine("Run away");
+                            //Monster gets an attack of opportunity
+                            Console.WriteLine(strawHats[loopCount].Name + " attacks you as you flee");
+                            strawHats[loopCount].HitChance += 100;
+                            Combat.DoAttack(strawHats[loopCount], player);
+                            Console.WriteLine();//for formatting
+                            reload = true;
+                            break;
                     case ConsoleKey.P:
-                        break;
-                    case ConsoleKey.E:      
+                            Console.WriteLine(player);
+                            break;
+                    case ConsoleKey.E:
+                            Console.WriteLine(strawHats[loopCount]);
                         break;
                     case ConsoleKey.X:
-                        Console.WriteLine("Yeah id quit too");
+                        Console.WriteLine("Yeah I'd quit too");
                         exit = true;
+                        reload = true;
                         break;
                     default:
                         Console.WriteLine("Learn to read... Press A) C) R) P) E) or X)");
                         
                         break;
                 }
-                loopCount++;
+                } while (!reload);
             } 
             #endregion
         }
