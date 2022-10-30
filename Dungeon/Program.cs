@@ -21,10 +21,10 @@ namespace Dungeon
                 cutlass, blunderbuss, hook, pike, shield
             };
             #endregion
-
+            
 
             #region Player Creation
-            
+
             Console.WriteLine("You wake on an anchored ship you hear voices, but before you act you start to remember who you are...\n\tPress any key to continue...");
             Console.ReadKey();
             Console.Clear();
@@ -244,7 +244,6 @@ namespace Dungeon
             }
 
             #endregion
-
             #region Enemy Creation
             Captain luffy = new Captain(50, 50, "Monkey D' Luffy", 50, 30, 25 , 10, "A what looks like a kid but fights like a man", Captain.DrunkGenerator());
             Pirate godUsopp = new Pirate(15, 15, "God Usopp", 90, 25, 10, 5, "A lanky individual who is always complaining");
@@ -364,8 +363,10 @@ namespace Dungeon
                             
                             
                                 bool isShopClosed = false;
+                                
                                 while (!isShopClosed) 
                                 {
+                                    
                                     if (score >= 1)
                                     {
                                         if (loopCount == 0)
@@ -498,6 +499,89 @@ namespace Dungeon
                 } while (!reload);
             } 
             #endregion
+        }
+    }
+    public class Music
+    {
+        static int[] DO = new int[] { 131, 262, 523, 1046 };
+        static int[] RE = new int[] { 147, 294, 587, 1174 };
+        static int[] MI = new int[] { 165, 330, 659, 1318 };
+        static int[] FA = new int[] { 175, 349, 698, 1396 };
+        static int[] SO = new int[] { 196, 392, 784, 1568 };
+        static int[] LA = new int[] { 220, 440, 880, 1760 };
+        static int[] TI = new int[] { 247, 494, 988, 1976 };
+        public static void SweetChild()
+        {
+
+
+
+            
+                bool musicExit = false;
+            while (!musicExit)
+            {
+                Console.WriteLine("Press Any key to stop");
+                //string userStop = Convert.ToString(Console.Read());
+                string userStop = Console.ReadLine();
+                if (userStop != null)
+            {
+
+                Console.WriteLine("Press any key to continue...");
+                Console.Read();
+                    musicExit = true;
+                
+            }
+            
+                int oct1 = 0;
+                int oct2 = 1;
+                int oct3 = 2;
+                int oct4 = 3;
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.Beep(SO[oct2], 250);
+                    Console.Beep(SO[oct3], 250);
+                    Console.Beep(RE[oct3], 250);
+                    Console.Beep(DO[oct3], 250);
+                    Console.Beep(DO[oct4], 250);
+                    Console.Beep(RE[oct3], 250);
+                    Console.Beep(TI[oct3], 250);
+                    Console.Beep(RE[oct3], 250);
+                }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.Beep(LA[oct2], 250);
+                    Console.Beep(SO[oct3], 250);
+                    Console.Beep(RE[oct3], 250);
+                    Console.Beep(DO[oct3], 250);
+                    Console.Beep(DO[oct4], 250);
+                    Console.Beep(RE[oct3], 250);
+                    Console.Beep(TI[oct3], 250);
+                    Console.Beep(RE[oct3], 250);
+                }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.Beep(DO[oct3], 250);
+                    Console.Beep(SO[oct3], 250);
+                    Console.Beep(RE[oct3], 250);
+                    Console.Beep(DO[oct3], 250);
+                    Console.Beep(DO[oct4], 250);
+                    Console.Beep(RE[oct3], 250);
+                    Console.Beep(TI[oct3], 250);
+                    Console.Beep(RE[oct3], 250);
+                }
+
+                Console.Beep(SO[oct2], 250);
+                Console.Beep(SO[oct3], 250);
+                Console.Beep(RE[oct3], 250);
+                Console.Beep(DO[oct3], 250);
+                Console.Beep(DO[oct4], 250);
+                Console.Beep(RE[oct3], 250);
+                Console.Beep(TI[oct3], 250);
+                Console.Beep(RE[oct3], 250);
+            
+            } 
+
         }
     }
 }

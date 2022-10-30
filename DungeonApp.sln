@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dungeon", "Dungeon\Dungeon.csproj", "{EDE83B6C-C2F7-4A47-8ECD-2122E6CA1426}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dungeon", "Dungeon\Dungeon.csproj", "{EDE83B6C-C2F7-4A47-8ECD-2122E6CA1426}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonLibrary", "DungeonLibrary\DungeonLibrary.csproj", "{41983E8A-0491-4547-BFA0-E11667DCC034}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DungeonLibrary", "DungeonLibrary\DungeonLibrary.csproj", "{41983E8A-0491-4547-BFA0-E11667DCC034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonTests", "DungeonTests\DungeonTests.csproj", "{3F7C4DB6-5CA5-471A-BAD0-B8A2CEC0DA88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{41983E8A-0491-4547-BFA0-E11667DCC034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41983E8A-0491-4547-BFA0-E11667DCC034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41983E8A-0491-4547-BFA0-E11667DCC034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F7C4DB6-5CA5-471A-BAD0-B8A2CEC0DA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F7C4DB6-5CA5-471A-BAD0-B8A2CEC0DA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F7C4DB6-5CA5-471A-BAD0-B8A2CEC0DA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F7C4DB6-5CA5-471A-BAD0-B8A2CEC0DA88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
