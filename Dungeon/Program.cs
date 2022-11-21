@@ -1,6 +1,8 @@
 ﻿using DungeonLibrary;
+using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Dungeon
 {
@@ -8,7 +10,7 @@ namespace Dungeon
     {
         static void Main(string[] args)
         {
-
+            Console.Title = "Escape the sea dwellers";
             #region Weapons
             Weapon cutlass = new Weapon(10, 15, "Black Beards Cutlass", 30, WeaponType.Cutlass, "The legendary pirate Black Beard personal cutlass");
             Weapon blunderbuss = new Weapon(11, 14, "Big o'le Blunderbuss", 30, WeaponType.Musket, "Above average in size, this is a real gun");
@@ -25,7 +27,39 @@ namespace Dungeon
 
             #region Player Creation
 
-            Console.WriteLine("You wake on an anchored ship you hear voices, but before you act you start to remember who you are...\n\tPress any key to continue...");
+            Console.WriteLine(@"You wake on an anchored ship you hear voices, but before you act you start to remember who you are...
+                    |
+                    |
+           |        |
+         |-|-|      |
+           |        |
+           | {O}    |
+           '--|     |
+             .|]_   |
+       _.-=.' |     |
+      |    |  |]_   |
+      |_.-='  |   __|__
+       _.-='  |\   /|\
+      |    |  |-'-'-'-'-.
+      |_.-='  '========='
+           `   |     |
+            `. |    / \
+              ||   /   \____.--=''''==--.._
+              ||_.'--=='    |__  __  __  _.'
+              ||  |    |    |\ ||  ||  || |                        ___
+ ____         ||__|____|____| \||__||__||_/    __________________/|   |
+|    |______  |===.---. .---.========''''=-._ |     |     |     / |   |
+|    ||     |\| |||   | |   |      '===' ||  \|_____|_____|____/__|___|
+|-.._||_____|_\___'---' '---'______....---===''======//=//////========|
+|--------------\------------------/-----------------//-//////---------/
+|               \                /                 // //////         /
+|                \______________/                 // //////         /
+|                                        _____===//=//////=========/
+|==============================================================LGB/
+'----------------------------------------------------------------`
+
+------------------------------------------------");
+            Console.WriteLine("\tPress any key to continue...");
             Console.ReadKey();
             Console.Clear();
 
